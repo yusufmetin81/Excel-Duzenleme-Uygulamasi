@@ -25,6 +25,14 @@ namespace Excel_Düzenleme_Programı
              Data Source =" + excelYol + ";" +
              "Extended Properties= 'Excel 12.0 Xml;HDR=YES'");
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)//Form Kontrollü Kapatma
+        {
+            DialogResult result = MessageBox.Show("Uygulamadan Çıkmak İstediğinize Emin misiniz?", "Uygulamadan Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)//Dosya Yolu Olmadığında Form KOMPLE KAPALI Haldedir. 
         {
             Dosya_secim_zorunlulugu();
@@ -35,6 +43,18 @@ namespace Excel_Düzenleme_Programı
             Ekle_Button.Enabled = false;
             Güncelle_Button.Enabled = false;
             ÖzelSil_button.Enabled = false;
+            
+            //textBox9.ForeColor = Color.Gray;
+            //textBox9.Text = "Örn;541 358 7425";
+
+            //textBox10.ForeColor = Color.Gray;
+            //textBox10.Text = "Örn;541 358 7425";
+
+            //textBox11.ForeColor = Color.Gray;   // BURASI FAKS ALANI
+            //textBox11.Text = "Örn;541 358 7425";
+
+            //textBox12.ForeColor = Color.Gray;
+            //textBox12.Text = "Örn;541 358 7425";
         }
 
         void Dosya_secim_zorunlulugu()//Dosya Yolu Seçme Zorunluğu
@@ -89,6 +109,7 @@ namespace Excel_Düzenleme_Programı
             {
                 dataGridView1.DataSource = null;
             }
+
             // Form Listelendiğinde Otomatik Olarak 1.Satır Seçili Olarak Gelir
             int sec = dataGridView1.SelectedCells[0].RowIndex;
             textBox1.Text = dataGridView1.Rows[sec].Cells[0].Value.ToString();
@@ -110,7 +131,7 @@ namespace Excel_Düzenleme_Programı
             Listele_metod();
         }
 
-        //----------------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------------------
         // Sadece sayısal verilerin girişine izin veren Kod Parçası.
         // - , (), Boşluk ve Null değer girişine izin vermez ve Boş Değer alamadığı için zorunlu alan olmuş olur.
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)// İD ALANI-Veri Engeli
@@ -276,7 +297,6 @@ namespace Excel_Düzenleme_Programı
 
         private void Güncelle_Button_Click(object sender, EventArgs e)//Kayıt Güncelleme
         {
-
             baglanti.Open();
             OleDbCommand güncelle = new OleDbCommand("update [sayfa1$] set firma_adi=@p2, sektor=@p3, isim=@p4, il=@p5, adres=@p6, email=@p7, ilce=@p8, tel=@p9, tel2=@p10, faks=@p11, cep_tel=@p12 where id=@p1", baglanti);
 
@@ -293,7 +313,8 @@ namespace Excel_Düzenleme_Programı
             güncelle.Parameters.AddWithValue("@p12", textBox12.Text);
             güncelle.Parameters.AddWithValue("@p1", textBox1.Text);
 
-            güncelle.ExecuteNonQuery();
+            var sonuc = güncelle.ExecuteNonQuery();
+            
             //dataGridView1.Refresh();
             dataGridView1.DataSource = null;
             Listele_metod();
@@ -383,163 +404,163 @@ namespace Excel_Düzenleme_Programı
             {
                 MessageBox.Show(ex.Message + "/n/n" + ex.ToString());
             }
-
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+    //    private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+    //    {
+    //      try
+    //      {
+    //            progressBar1.Maximum = dataGridView1.Rows.Count + 1;
+
+    //            foreach (DataGridViewRow row in dataGridView1.Rows)
+    //            {
+    //                progressBar1.Value = row.Index + 1;
+
+    //                string id = row.Cells[0].Value.ToString();
+    //                string firma_adi = row.Cells[1].Value.ToString();
+    //                string sektor = row.Cells[2].Value.ToString();
+    //                string isim = row.Cells[3].Value.ToString();
+    //                string il = row.Cells[4].Value.ToString();
+    //                string adres = row.Cells[5].Value.ToString();
+    //                string email = row.Cells[6].Value.ToString();
+    //                string ilce = row.Cells[7].Value.ToString();
+    //                string tel = row.Cells[8].Value.ToString();
+    //                string tel2 = row.Cells[9].Value.ToString();
+    //                string faks = row.Cells[10].Value.ToString();
+    //                string cep_tel = row.Cells[11].Value.ToString();
+                    
+    //                tel = tel.Replace("-", "");
+    //                tel2 = tel2.Replace("-", "");
+    //                faks = faks.Replace("-", "");
+    //                cep_tel = cep_tel.Replace("-", "");
+
+    //                tel = tel.Replace("(", "");
+    //                tel2 = tel2.Replace("(", "");
+    //                faks = faks.Replace("(", "");
+    //                cep_tel = cep_tel.Replace("(", "");
+
+    //                tel = tel.Replace(")", "");
+    //                tel2 = tel2.Replace(")", "");
+    //                faks = faks.Replace(")", "");
+    //                cep_tel = cep_tel.Replace(")", "");
+
+    //                tel = tel.Replace(" ", "");
+    //                tel2 = tel2.Replace(" ", "");
+    //                faks = faks.Replace(" ", "");
+    //                cep_tel = cep_tel.Replace(" ", "");
+
+    //                baglanti.Open();
+
+    //                OleDbCommand güncelle = new OleDbCommand("update [sayfa1$] set firma_adi=@p2, sektor=@p3, isim=@p4, il=@p5, adres=@p6, email=@p7, ilce=@p8, tel=@p9, tel2=@p10, faks=@p11, cep_tel=@p12 where id=@p1", baglanti);
+
+    //                güncelle.Parameters.AddWithValue("@p1", id);
+    //                güncelle.Parameters.AddWithValue("@p2", firma_adi);
+    //                güncelle.Parameters.AddWithValue("@p3", sektor);
+    //                güncelle.Parameters.AddWithValue("@p4", isim);
+    //                güncelle.Parameters.AddWithValue("@p5", il);
+    //                güncelle.Parameters.AddWithValue("@p6", adres);
+    //                güncelle.Parameters.AddWithValue("@p7", email);
+    //                güncelle.Parameters.AddWithValue("@p8", ilce);
+    //                güncelle.Parameters.AddWithValue("@p9", tel);
+    //                güncelle.Parameters.AddWithValue("@10", tel2);
+    //                güncelle.Parameters.AddWithValue("@11", faks);
+    //                güncelle.Parameters.AddWithValue("@12", cep_tel);
+
+    //                güncelle.ExecuteNonQuery();
+    //                baglanti.Close();
+    //            }
+    //    }
+    //        catch
+    //        {
+    //            MessageBox.Show("Güncelleme Başarısız");
+    //        }
+    //}
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) // TÜM KAYITLARIN NUMARA VERİLERİNİ TEMİZLEYEN  BackGroundWorker YAPISI
         {
-            try
+
+            progressBar1.Maximum = dataGridView1.Rows.Count + 1;
+            foreach (DataGridViewRow item in dataGridView1.Rows)
             {
-                progressBar1.Maximum = dataGridView1.Rows.Count + 1;
+                progressBar1.Value = dataGridView1.Rows.Count + 1;
+                progressBar1.Value = item.Index;
 
-                foreach (DataGridViewRow row in dataGridView1.Rows)
-                {
-                    progressBar1.Value = row.Index + 1;
+                    textBox1.Text = item.Cells[0].Value.ToString();
+                    textBox2.Text = item.Cells[1].Value.ToString();
+                    textBox3.Text = item.Cells[2].Value.ToString();
+                    textBox4.Text = item.Cells[3].Value.ToString();
+                    textBox5.Text = item.Cells[4].Value.ToString();
+                    textBox6.Text = item.Cells[5].Value.ToString();
+                    textBox7.Text = item.Cells[6].Value.ToString();
+                    textBox8.Text = item.Cells[7].Value.ToString();
+                    textBox9.Text = item.Cells[8].Value.ToString();
+                    textBox10.Text = item.Cells[9].Value.ToString();
+                    textBox11.Text = item.Cells[10].Value.ToString();
+                    textBox12.Text = item.Cells[11].Value.ToString();
 
-                    string id = row.Cells[0].Value.ToString();
-                    string firma_adi = row.Cells[1].Value.ToString();
-                    string sektor = row.Cells[2].Value.ToString();
-                    string isim = row.Cells[3].Value.ToString();
-                    string il = row.Cells[4].Value.ToString();
-                    string adres = row.Cells[5].Value.ToString();
-                    string email = row.Cells[6].Value.ToString();
-                    string ilce = row.Cells[7].Value.ToString();
-                    string tel = row.Cells[8].Value.ToString();
-                    string tel2 = row.Cells[9].Value.ToString();
-                    string faks = row.Cells[10].Value.ToString();
-                    string cep_tel = row.Cells[11].Value.ToString();
+                    string degisecek1 = "-";
+                    string degismis1 = "";
+                    textBox9.Text = textBox9.Text.Replace(degisecek1, degismis1);
+                    textBox10.Text = textBox10.Text.Replace(degisecek1, degismis1);
+                    textBox11.Text = textBox11.Text.Replace(degisecek1, degismis1);
+                    textBox12.Text = textBox12.Text.Replace(degisecek1, degismis1);
 
-                    tel = tel.Replace("-", "");
-                    tel2 = tel2.Replace("-", "");
-                    faks = faks.Replace("-", "");
-                    cep_tel = cep_tel.Replace("-", "");
+                    string degisecek2 = "()";
+                    string degismis2 = "";
+                    textBox9.Text = textBox9.Text.Replace(degisecek2, degismis2);
+                    textBox10.Text = textBox10.Text.Replace(degisecek2, degismis2);
+                    textBox11.Text = textBox11.Text.Replace(degisecek2, degismis2);
+                    textBox12.Text = textBox12.Text.Replace(degisecek2, degismis2);
 
-                    tel = tel.Replace("(", "");
-                    tel2 = tel2.Replace("(", "");
-                    faks = faks.Replace("(", "");
-                    cep_tel = cep_tel.Replace("(", "");
+                    string degisecek3 = "(   )";
+                    string degismis3 = "";
+                    textBox9.Text = textBox9.Text.Replace(degisecek3, degismis3);
+                    textBox10.Text = textBox10.Text.Replace(degisecek3, degismis3);
+                    textBox11.Text = textBox11.Text.Replace(degisecek3, degismis3);
+                    textBox12.Text = textBox12.Text.Replace(degisecek3, degismis3);
 
-                    tel = tel.Replace(")", "");
-                    tel2 = tel2.Replace(")", "");
-                    faks = faks.Replace(")", "");
-                    cep_tel = cep_tel.Replace(")", "");
+                    string degisecek4 = "(";
+                    string degismis4 = "";
+                    textBox9.Text = textBox9.Text.Replace(degisecek4, degismis4);
+                    textBox10.Text = textBox10.Text.Replace(degisecek4, degismis4);
+                    textBox11.Text = textBox11.Text.Replace(degisecek4, degismis4);
+                    textBox12.Text = textBox12.Text.Replace(degisecek4, degismis4);
 
-                    tel = tel.Replace(" ", "");
-                    tel2 = tel2.Replace(" ", "");
-                    faks = faks.Replace(" ", "");
-                    cep_tel = cep_tel.Replace(" ", "");
+                    string degisecek5 = ")";
+                    string degismis5 = "";
+                    textBox9.Text = textBox9.Text.Replace(degisecek5, degismis5);
+                    textBox10.Text = textBox10.Text.Replace(degisecek5, degismis5);
+                    textBox11.Text = textBox11.Text.Replace(degisecek5, degismis5);
+                    textBox12.Text = textBox12.Text.Replace(degisecek5, degismis5);
+
+                    string degisecek6 = "    ";
+                    string degismis6 = "";
+                    textBox9.Text = textBox9.Text.Replace(degisecek6, degismis6);
+                    textBox10.Text = textBox10.Text.Replace(degisecek6, degismis6);
+                    textBox11.Text = textBox11.Text.Replace(degisecek6, degismis6);
+                    textBox12.Text = textBox12.Text.Replace(degisecek6, degismis6);
 
                     baglanti.Open();
-
                     OleDbCommand güncelle = new OleDbCommand("update [sayfa1$] set firma_adi=@p2, sektor=@p3, isim=@p4, il=@p5, adres=@p6, email=@p7, ilce=@p8, tel=@p9, tel2=@p10, faks=@p11, cep_tel=@p12 where id=@p1", baglanti);
 
-                    güncelle.Parameters.AddWithValue("@p1", id);
-                    güncelle.Parameters.AddWithValue("@p2", firma_adi);
-                    güncelle.Parameters.AddWithValue("@p3", sektor);
-                    güncelle.Parameters.AddWithValue("@p4", isim);
-                    güncelle.Parameters.AddWithValue("@p5", il);
-                    güncelle.Parameters.AddWithValue("@p6", adres);
-                    güncelle.Parameters.AddWithValue("@p7", email);
-                    güncelle.Parameters.AddWithValue("@p8", ilce);
-                    güncelle.Parameters.AddWithValue("@p9", tel);
-                    güncelle.Parameters.AddWithValue("@10", tel2);
-                    güncelle.Parameters.AddWithValue("@11", faks);
-                    güncelle.Parameters.AddWithValue("@12", cep_tel);
+                    güncelle.Parameters.AddWithValue("@p2", textBox2.Text);
+                    güncelle.Parameters.AddWithValue("@p3", textBox3.Text);
+                    güncelle.Parameters.AddWithValue("@p4", textBox4.Text);
+                    güncelle.Parameters.AddWithValue("@p5", textBox5.Text);
+                    güncelle.Parameters.AddWithValue("@p6", textBox6.Text);
+                    güncelle.Parameters.AddWithValue("@P7", textBox7.Text);
+                    güncelle.Parameters.AddWithValue("@p8", textBox8.Text);
+                    güncelle.Parameters.AddWithValue("@p9", textBox9.Text);
+                    güncelle.Parameters.AddWithValue("@p10", textBox10.Text);
+                    güncelle.Parameters.AddWithValue("@p11", textBox11.Text);
+                    güncelle.Parameters.AddWithValue("@p12", textBox12.Text);
+                    güncelle.Parameters.AddWithValue("@p1", textBox1.Text);
 
                     güncelle.ExecuteNonQuery();
                     baglanti.Close();
-                }
+                
             }
-            catch
-            {
-                MessageBox.Show("Güncelleme Başarısız");
-            } 
         }
-        //private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) // TÜM KAYITLARIN NUMARA VERİLERİNİ TEMİZLEYEN  BackGroundWorker YAPISI
-        //{
-
-                    //    progressBar1.Maximum = dataGridView1.Rows.Count + 1;
-                    //    foreach (DataGridViewRow item in dataGridView1.Rows)
-                    //    {
-                    //        progressBar1.Value = dataGridView1.Rows.Count + 1;
-                    //        progressBar1.Value = item.Index;
-
-                    //        textBox1.Text = item.Cells[0].Value.ToString();
-                    //        textBox2.Text = item.Cells[1].Value.ToString();
-                    //        textBox3.Text = item.Cells[2].Value.ToString();
-                    //        textBox4.Text = item.Cells[3].Value.ToString();
-                    //        textBox5.Text = item.Cells[4].Value.ToString();
-                    //        textBox6.Text = item.Cells[5].Value.ToString();
-                    //        textBox7.Text = item.Cells[6].Value.ToString();
-                    //        textBox8.Text = item.Cells[7].Value.ToString();
-                    //        textBox9.Text = item.Cells[8].Value.ToString();
-                    //        textBox10.Text = item.Cells[9].Value.ToString();
-                    //        textBox11.Text = item.Cells[10].Value.ToString();
-                    //        textBox12.Text = item.Cells[11].Value.ToString();
-
-                    //        string degisecek1 = "-";
-                    //        string degismis1 = "";
-                    //        textBox9.Text = textBox9.Text.Replace(degisecek1, degismis1);
-                    //        textBox10.Text = textBox10.Text.Replace(degisecek1, degismis1);
-                    //        textBox11.Text = textBox11.Text.Replace(degisecek1, degismis1);
-                    //        textBox12.Text = textBox12.Text.Replace(degisecek1, degismis1);
-
-                    //        string degisecek2 = "()";
-                    //        string degismis2 = "";
-                    //        textBox9.Text = textBox9.Text.Replace(degisecek2, degismis2);
-                    //        textBox10.Text = textBox10.Text.Replace(degisecek2, degismis2);
-                    //        textBox11.Text = textBox11.Text.Replace(degisecek2, degismis2);
-                    //        textBox12.Text = textBox12.Text.Replace(degisecek2, degismis2);
-
-                    //        string degisecek3 = "(   )";
-                    //        string degismis3 = "";
-                    //        textBox9.Text = textBox9.Text.Replace(degisecek3, degismis3);
-                    //        textBox10.Text = textBox10.Text.Replace(degisecek3, degismis3);
-                    //        textBox11.Text = textBox11.Text.Replace(degisecek3, degismis3);
-                    //        textBox12.Text = textBox12.Text.Replace(degisecek3, degismis3);
-
-                    //        string degisecek4 = "(";
-                    //        string degismis4 = "";
-                    //        textBox9.Text = textBox9.Text.Replace(degisecek4, degismis4);
-                    //        textBox10.Text = textBox10.Text.Replace(degisecek4, degismis4);
-                    //        textBox11.Text = textBox11.Text.Replace(degisecek4, degismis4);
-                    //        textBox12.Text = textBox12.Text.Replace(degisecek4, degismis4);
-
-                    //        string degisecek5 = ")";
-                    //        string degismis5 = "";
-                    //        textBox9.Text = textBox9.Text.Replace(degisecek5, degismis5);
-                    //        textBox10.Text = textBox10.Text.Replace(degisecek5, degismis5);
-                    //        textBox11.Text = textBox11.Text.Replace(degisecek5, degismis5);
-                    //        textBox12.Text = textBox12.Text.Replace(degisecek5, degismis5);
-
-                    //        string degisecek6 = "    ";
-                    //        string degismis6 = "";
-                    //        textBox9.Text = textBox9.Text.Replace(degisecek6, degismis6);
-                    //        textBox10.Text = textBox10.Text.Replace(degisecek6, degismis6);
-                    //        textBox11.Text = textBox11.Text.Replace(degisecek6, degismis6);
-                    //        textBox12.Text = textBox12.Text.Replace(degisecek6, degismis6);
-
-                    //        baglanti.Open();
-                    //        OleDbCommand güncelle = new OleDbCommand("update [sayfa1$] set firma_adi=@p2, sektor=@p3, isim=@p4, il=@p5, adres=@p6, email=@p7, ilce=@p8, tel=@p9, tel2=@p10, faks=@p11, cep_tel=@p12 where id=@p1", baglanti);
-
-                    //        güncelle.Parameters.AddWithValue("@p2", textBox2.Text);
-                    //        güncelle.Parameters.AddWithValue("@p3", textBox3.Text);
-                    //        güncelle.Parameters.AddWithValue("@p4", textBox4.Text);
-                    //        güncelle.Parameters.AddWithValue("@p5", textBox5.Text);
-                    //        güncelle.Parameters.AddWithValue("@p6", textBox6.Text);
-                    //        güncelle.Parameters.AddWithValue("@P7", textBox7.Text);
-                    //        güncelle.Parameters.AddWithValue("@p8", textBox8.Text);
-                    //        güncelle.Parameters.AddWithValue("@p9", textBox9.Text);
-                    //        güncelle.Parameters.AddWithValue("@p10", textBox10.Text);
-                    //        güncelle.Parameters.AddWithValue("@p11", textBox11.Text);
-                    //        güncelle.Parameters.AddWithValue("@p12", textBox12.Text);
-                    //        güncelle.Parameters.AddWithValue("@p1", textBox1.Text);
-
-                    //        güncelle.ExecuteNonQuery();
-                    //        baglanti.Close();
-                    //    }
-                    //}
-                    private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
                 MessageBox.Show("Bütün Telefon Verileri Temizlenmiştir", "Temizleme Mesajı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Btn_acma();
@@ -567,10 +588,8 @@ namespace Excel_Düzenleme_Programı
                     }
                 }
             }
-
             private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)//CheckedListBox'dan Sildirme İşlemi
             {
-
                 if (checkedListBox1.SelectedIndex == 0) // TELEFON 1 ALANI 
                 {
                     foreach (DataGridViewRow item in dataGridView1.Rows)
@@ -616,8 +635,6 @@ namespace Excel_Düzenleme_Programı
 
                 else if (checkedListBox1.SelectedIndex == 1)//TELEFON 2 ALANI 
                 {
-                    //if (true/*checkedListBox1.SelectedIndex == 1*/) 
-                    // {
                     foreach (DataGridViewRow item in dataGridView1.Rows)
                     {
                         progressBar1.Maximum = dataGridView1.Rows.Count + 1;
@@ -658,11 +675,8 @@ namespace Excel_Düzenleme_Programı
                     }
                 }
 
-
                 else if (checkedListBox1.SelectedIndex == 2)// FAKS ALANI
                 {
-                    // if (checkedListBox1.SelectedIndex == 2)  
-                    // {
                     foreach (DataGridViewRow item in dataGridView1.Rows)
                     {
                         progressBar1.Maximum = dataGridView1.Rows.Count + 1;
@@ -701,14 +715,10 @@ namespace Excel_Düzenleme_Programı
                             }
                         }
                     }
-                    //} 
                 }
-
 
                 else if (checkedListBox1.SelectedIndex == 3)// CEP TELEFONU ALANI
                 {
-                    //if (checkedListBox1.SelectedIndex == 3) 
-                    // {
                     foreach (DataGridViewRow item in dataGridView1.Rows)
                     {
                         progressBar1.Maximum = dataGridView1.Rows.Count + 1;
@@ -746,8 +756,7 @@ namespace Excel_Düzenleme_Programı
                                 baglanti.Close();
                             }
                         }
-                    }
-                    //}
+                    } 
                 }
 
                 else
@@ -830,7 +839,6 @@ namespace Excel_Düzenleme_Programı
                 Btn_acma();
             }
 
-            //System.NullReferenceException: 'Nesne başvurusu bir nesnenin örneğine ayarlanmadı.'
             void Btn_kapatma() //Bir İşlem Dönerken Diğer İşlem Butonlarını Kapatıyor.
             {
                 DosyaYolu_Button.Enabled = false;
@@ -842,7 +850,7 @@ namespace Excel_Düzenleme_Programı
                 Güncelle_Button.Enabled = false;
                 ÖzelSil_button.Enabled = false;
             }
-            void Btn_acma() //Kapatılmış Butonları İşlem Sonunda Tekrardan Açıyor.
+            void Btn_acma() //Kapatılmış Butonları İşlem Sonunda Tekrardan Açıyor. 
             {
                 DosyaYolu_Button.Enabled = true;
                 Sil_Button.Enabled = true;
@@ -854,6 +862,65 @@ namespace Excel_Düzenleme_Programı
                 ÖzelSil_button.Enabled = true;
             }
 
+        private void pictureBox1_Click(object sender, EventArgs e)//Fotoğraf Linki
+        {
+            System.Diagnostics.Process.Start("https://www.bilsoft.com");
         }
+
+        // Placeholder Kısmı
+        private void textBox9_Enter(object sender, EventArgs e) //Placeholder Kısmı TextBox9
+        {
+            if (textBox9.Text == "Örn; 541 327 1267")
+            {
+                textBox9.ForeColor = Color.FromArgb(0, 0, 192);
+                textBox9.Text = "";
+            }
+        }
+        private void textBox9_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox9.Text))
+            {
+                textBox9.ForeColor = SystemColors.GrayText;
+                textBox9.Text = "Örn; 541 327 1267";
+            }
+        }
+
+        private void textBox10_Enter(object sender, EventArgs e)//Placeholder Kısmı TextBox10
+        {
+            if (textBox10.Text == "Örn; 541 327 1267")
+            {
+                textBox10.ForeColor = Color.FromArgb(0, 0, 192);
+                textBox10.Text = "";
+            }
+        }
+
+        private void textBox10_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox9.Text))
+            {
+                textBox10.ForeColor = SystemColors.GrayText;
+                textBox10.Text = "Örn; 541 327 1267";
+            }
+
+        }
+
+        private void textBox12_Enter(object sender, EventArgs e)//Placeholder Kısmı TextBox12
+        {
+            if (textBox12.Text == "Örn; 541 327 1267")
+            {
+                textBox12.ForeColor = Color.FromArgb(0, 0, 192);
+                textBox12.Text = "";
+            }
+        }
+
+        private void textBox12_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox9.Text))
+            {
+                textBox12.ForeColor = SystemColors.GrayText;
+                textBox12.Text = "Örn; 541 327 1267";
+            }
+        }
+    }
     }
 

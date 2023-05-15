@@ -309,7 +309,7 @@ namespace Excel_Düzenleme_Programı
             this.Güncelle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Güncelle_Button.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Güncelle_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Güncelle_Button.Location = new System.Drawing.Point(572, 513);
+            this.Güncelle_Button.Location = new System.Drawing.Point(575, 513);
             this.Güncelle_Button.Name = "Güncelle_Button";
             this.Güncelle_Button.Size = new System.Drawing.Size(113, 26);
             this.Güncelle_Button.TabIndex = 20;
@@ -322,10 +322,13 @@ namespace Excel_Düzenleme_Programı
             this.textBox9.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.textBox9.Location = new System.Drawing.Point(118, 459);
+            this.textBox9.MaxLength = 10;
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(178, 23);
             this.textBox9.TabIndex = 21;
+            this.textBox9.Enter += new System.EventHandler(this.textBox9_Enter);
             this.textBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
+            this.textBox9.Leave += new System.EventHandler(this.textBox9_Leave);
             // 
             // label9
             // 
@@ -344,10 +347,13 @@ namespace Excel_Düzenleme_Programı
             this.textBox10.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.textBox10.Location = new System.Drawing.Point(118, 492);
+            this.textBox10.MaxLength = 10;
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(178, 23);
             this.textBox10.TabIndex = 23;
+            this.textBox10.Enter += new System.EventHandler(this.textBox10_Enter);
             this.textBox10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox10_KeyPress);
+            this.textBox10.Leave += new System.EventHandler(this.textBox10_Leave);
             // 
             // label10
             // 
@@ -394,6 +400,7 @@ namespace Excel_Düzenleme_Programı
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // TümKayıtlarınNoSil
             // 
@@ -415,7 +422,7 @@ namespace Excel_Düzenleme_Programı
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.progressBar1.Location = new System.Drawing.Point(0, 637);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1370, 24);
+            this.progressBar1.Size = new System.Drawing.Size(1366, 24);
             this.progressBar1.TabIndex = 29;
             // 
             // backgroundWorker1
@@ -528,10 +535,13 @@ namespace Excel_Düzenleme_Programı
             this.textBox12.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.textBox12.Location = new System.Drawing.Point(118, 556);
+            this.textBox12.MaxLength = 10;
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(178, 23);
             this.textBox12.TabIndex = 26;
+            this.textBox12.Enter += new System.EventHandler(this.textBox12_Enter);
             this.textBox12.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox12_KeyPress);
+            this.textBox12.Leave += new System.EventHandler(this.textBox12_Leave);
             // 
             // textBox13
             // 
@@ -568,7 +578,7 @@ namespace Excel_Düzenleme_Programı
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1370, 661);
+            this.ClientSize = new System.Drawing.Size(1366, 661);
             this.Controls.Add(this.Mail_Sil);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.DosyaYolu_Button);
@@ -610,10 +620,15 @@ namespace Excel_Düzenleme_Programı
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1386, 700);
+            this.MinimumSize = new System.Drawing.Size(1200, 700);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Excel Düzenleme Prrogramı";
+            this.Text = "Excel Düzenleme Programı";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
