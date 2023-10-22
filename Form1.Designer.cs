@@ -66,17 +66,20 @@ namespace Excel_Düzenleme_Programı
             this.label13 = new System.Windows.Forms.Label();
             this.ÖzelSil_button = new System.Windows.Forms.Button();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.DosyaYolu_Button = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.Mail_Sil = new System.Windows.Forms.Button();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
+            this.Kopya_iconu = new System.Windows.Forms.PictureBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.Add_Picture = new System.Windows.Forms.PictureBox();
+            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Kopya_iconu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Add_Picture)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -265,7 +268,7 @@ namespace Excel_Düzenleme_Programı
             this.Listele_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Listele_Button.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Listele_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Listele_Button.Location = new System.Drawing.Point(575, 449);
+            this.Listele_Button.Location = new System.Drawing.Point(573, 457);
             this.Listele_Button.Name = "Listele_Button";
             this.Listele_Button.Size = new System.Drawing.Size(113, 26);
             this.Listele_Button.TabIndex = 17;
@@ -280,7 +283,7 @@ namespace Excel_Düzenleme_Programı
             this.Ekle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Ekle_Button.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Ekle_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Ekle_Button.Location = new System.Drawing.Point(575, 481);
+            this.Ekle_Button.Location = new System.Drawing.Point(573, 489);
             this.Ekle_Button.Name = "Ekle_Button";
             this.Ekle_Button.Size = new System.Drawing.Size(113, 26);
             this.Ekle_Button.TabIndex = 18;
@@ -294,7 +297,7 @@ namespace Excel_Düzenleme_Programı
             this.Sil_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Sil_Button.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Sil_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Sil_Button.Location = new System.Drawing.Point(338, 408);
+            this.Sil_Button.Location = new System.Drawing.Point(336, 416);
             this.Sil_Button.Name = "Sil_Button";
             this.Sil_Button.Size = new System.Drawing.Size(231, 58);
             this.Sil_Button.TabIndex = 19;
@@ -309,7 +312,7 @@ namespace Excel_Düzenleme_Programı
             this.Güncelle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Güncelle_Button.Font = new System.Drawing.Font("Segoe UI Symbol", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Güncelle_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Güncelle_Button.Location = new System.Drawing.Point(575, 513);
+            this.Güncelle_Button.Location = new System.Drawing.Point(573, 521);
             this.Güncelle_Button.Name = "Güncelle_Button";
             this.Güncelle_Button.Size = new System.Drawing.Size(113, 26);
             this.Güncelle_Button.TabIndex = 20;
@@ -387,11 +390,12 @@ namespace Excel_Düzenleme_Programı
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(178, 23);
             this.textBox11.TabIndex = 26;
-            this.textBox11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox11_KeyPress);
+       // this.textBox11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox11_KeyPress);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.ImageLocation = "";
             this.pictureBox1.Location = new System.Drawing.Point(1012, 558);
@@ -408,7 +412,7 @@ namespace Excel_Düzenleme_Programı
             this.TümKayıtlarınNoSil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TümKayıtlarınNoSil.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TümKayıtlarınNoSil.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.TümKayıtlarınNoSil.Location = new System.Drawing.Point(338, 472);
+            this.TümKayıtlarınNoSil.Location = new System.Drawing.Point(336, 480);
             this.TümKayıtlarınNoSil.Name = "TümKayıtlarınNoSil";
             this.TümKayıtlarınNoSil.Size = new System.Drawing.Size(231, 58);
             this.TümKayıtlarınNoSil.TabIndex = 28;
@@ -447,13 +451,14 @@ namespace Excel_Düzenleme_Programı
             this.checkedListBox1.BackColor = System.Drawing.Color.White;
             this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.checkedListBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
             "Telefon 1 Alanını TEMİZLE",
             "Telefon 2 Alanını TEMİZLE",
             "Faks Alanını TEMİZLE",
             "Cep Telefonu Alanını TEMİZLE"});
-            this.checkedListBox1.Location = new System.Drawing.Point(698, 434);
+            this.checkedListBox1.Location = new System.Drawing.Point(696, 442);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(221, 76);
             this.checkedListBox1.TabIndex = 31;
@@ -464,7 +469,8 @@ namespace Excel_Düzenleme_Programı
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(695, 415);
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label13.Location = new System.Drawing.Point(693, 423);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(224, 16);
             this.label13.TabIndex = 30;
@@ -476,7 +482,7 @@ namespace Excel_Düzenleme_Programı
             this.ÖzelSil_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ÖzelSil_button.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ÖzelSil_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.ÖzelSil_button.Location = new System.Drawing.Point(698, 516);
+            this.ÖzelSil_button.Location = new System.Drawing.Point(696, 524);
             this.ÖzelSil_button.Name = "ÖzelSil_button";
             this.ÖzelSil_button.Size = new System.Drawing.Size(221, 43);
             this.ÖzelSil_button.TabIndex = 32;
@@ -488,31 +494,6 @@ namespace Excel_Düzenleme_Programı
             // 
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
-            // 
-            // DosyaYolu_Button
-            // 
-            this.DosyaYolu_Button.BackColor = System.Drawing.Color.White;
-            this.DosyaYolu_Button.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(133)))), ((int)(((byte)(190)))));
-            this.DosyaYolu_Button.FlatAppearance.BorderSize = 2;
-            this.DosyaYolu_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DosyaYolu_Button.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DosyaYolu_Button.Location = new System.Drawing.Point(132, 12);
-            this.DosyaYolu_Button.Name = "DosyaYolu_Button";
-            this.DosyaYolu_Button.Size = new System.Drawing.Size(178, 45);
-            this.DosyaYolu_Button.TabIndex = 33;
-            this.DosyaYolu_Button.Text = "LÜTFEN DOSYA YOLUNU BELİRTİNİZ:";
-            this.DosyaYolu_Button.UseVisualStyleBackColor = false;
-            this.DosyaYolu_Button.Click += new System.EventHandler(this.DosyaYolu_Button_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, -3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(112, 74);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 34;
-            this.pictureBox2.TabStop = false;
             // 
             // openFileDialog1
             // 
@@ -545,13 +526,15 @@ namespace Excel_Düzenleme_Programı
             // 
             // textBox13
             // 
+            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox13.Cursor = System.Windows.Forms.Cursors.No;
             this.textBox13.Enabled = false;
             this.textBox13.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.textBox13.Location = new System.Drawing.Point(8, 77);
+            this.textBox13.Location = new System.Drawing.Point(19, 80);
             this.textBox13.Name = "textBox13";
             this.textBox13.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBox13.Size = new System.Drawing.Size(322, 23);
+            this.textBox13.Size = new System.Drawing.Size(311, 16);
             this.textBox13.TabIndex = 26;
             // 
             // Mail_Sil
@@ -560,7 +543,7 @@ namespace Excel_Düzenleme_Programı
             this.Mail_Sil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Mail_Sil.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Mail_Sil.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Mail_Sil.Location = new System.Drawing.Point(338, 536);
+            this.Mail_Sil.Location = new System.Drawing.Point(336, 544);
             this.Mail_Sil.Name = "Mail_Sil";
             this.Mail_Sil.Size = new System.Drawing.Size(231, 35);
             this.Mail_Sil.TabIndex = 35;
@@ -573,15 +556,68 @@ namespace Excel_Düzenleme_Programı
             this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
             this.backgroundWorker3.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker3_RunWorkerCompleted);
             // 
+            // Kopya_iconu
+            // 
+            this.Kopya_iconu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Kopya_iconu.Image = ((System.Drawing.Image)(resources.GetObject("Kopya_iconu.Image")));
+            this.Kopya_iconu.Location = new System.Drawing.Point(18, 102);
+            this.Kopya_iconu.Name = "Kopya_iconu";
+            this.Kopya_iconu.Size = new System.Drawing.Size(24, 24);
+            this.Kopya_iconu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Kopya_iconu.TabIndex = 36;
+            this.Kopya_iconu.TabStop = false;
+            this.Kopya_iconu.Click += new System.EventHandler(this.Kopya_iconu_Click);
+            this.Kopya_iconu.MouseEnter += new System.EventHandler(this.Kopya_iconu_MouseEnter);
+            this.Kopya_iconu.MouseLeave += new System.EventHandler(this.Kopya_iconu_MouseLeave);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label15.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label15.Location = new System.Drawing.Point(43, 108);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(134, 13);
+            this.label15.TabIndex = 37;
+            this.label15.Text = "Dosya Yolunu Kopyala";
+            // 
+            // Add_Picture
+            // 
+            this.Add_Picture.BackColor = System.Drawing.Color.Transparent;
+            this.Add_Picture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Add_Picture.Image = ((System.Drawing.Image)(resources.GetObject("Add_Picture.Image")));
+            this.Add_Picture.Location = new System.Drawing.Point(6, 9);
+            this.Add_Picture.Name = "Add_Picture";
+            this.Add_Picture.Size = new System.Drawing.Size(65, 67);
+            this.Add_Picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Add_Picture.TabIndex = 38;
+            this.Add_Picture.TabStop = false;
+            this.Add_Picture.Click += new System.EventHandler(this.Add_Picture_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label16.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label16.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label16.Location = new System.Drawing.Point(77, 37);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(194, 18);
+            this.label16.TabIndex = 39;
+            this.label16.Text = "Dosya Yolunu Belirtiniz";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1366, 661);
+            this.Controls.Add(this.textBox13);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.Add_Picture);
+            this.Controls.Add(this.Kopya_iconu);
             this.Controls.Add(this.Mail_Sil);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.DosyaYolu_Button);
             this.Controls.Add(this.ÖzelSil_button);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.label13);
@@ -589,7 +625,6 @@ namespace Excel_Düzenleme_Programı
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.TümKayıtlarınNoSil);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox13);
             this.Controls.Add(this.textBox12);
             this.Controls.Add(this.textBox11);
             this.Controls.Add(this.label11);
@@ -619,6 +654,7 @@ namespace Excel_Düzenleme_Programı
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label15);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -632,7 +668,8 @@ namespace Excel_Düzenleme_Programı
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Kopya_iconu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Add_Picture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -675,8 +712,6 @@ namespace Excel_Düzenleme_Programı
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button ÖzelSil_button;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
-        private System.Windows.Forms.Button DosyaYolu_Button;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox12;
@@ -684,6 +719,10 @@ namespace Excel_Düzenleme_Programı
         private System.Windows.Forms.Button Mail_Sil;
         private System.ComponentModel.BackgroundWorker backgroundWorker3;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.PictureBox Kopya_iconu;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox Add_Picture;
+        internal System.Windows.Forms.Label label16;
     }
 }
 

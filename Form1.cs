@@ -35,7 +35,7 @@ namespace Excel_Düzenleme_Programı
         }
         private void Form1_Load(object sender, EventArgs e)//Dosya Yolu Olmadığında Form KOMPLE KAPALI Haldedir. 
         {
-            Dosya_secim_zorunlulugu();
+            //Add_Picture.Enabled = false;
             Sil_Button.Enabled = false;
             TümKayıtlarınNoSil.Enabled = false;
             Mail_Sil.Enabled = false;
@@ -43,55 +43,36 @@ namespace Excel_Düzenleme_Programı
             Ekle_Button.Enabled = false;
             Güncelle_Button.Enabled = false;
             ÖzelSil_button.Enabled = false;
-            
-            //textBox9.ForeColor = Color.Gray;
-            //textBox9.Text = "Örn;541 358 7425";
+            label15.Visible = false;//İcon Metni Gözükmez
 
-            //textBox10.ForeColor = Color.Gray;
-            //textBox10.Text = "Örn;541 358 7425";
-
-            //textBox11.ForeColor = Color.Gray;   // BURASI FAKS ALANI
-            //textBox11.Text = "Örn;541 358 7425";
-
-            //textBox12.ForeColor = Color.Gray;
-            //textBox12.Text = "Örn;541 358 7425";
         }
 
-        void Dosya_secim_zorunlulugu()//Dosya Yolu Seçme Zorunluğu
-        {    //Dosya yolu belirtilen Alanın Null veya Boş olup olmadığını kontrol eder.
-            if (string.IsNullOrEmpty(textBox13.Text))//Dosya Yolu Boş ise true Değer Alarak Buraya Gelir ve Butonları Kapatır.
-            {
-                Sil_Button.Enabled = false;
-                TümKayıtlarınNoSil.Enabled = false;
-                Mail_Sil.Enabled = false;
-                Listele_Button.Enabled = false;
-                Ekle_Button.Enabled = false;
-                Güncelle_Button.Enabled = false;
-                ÖzelSil_button.Enabled = false;
-            }
-            else //Dosya Yolu Dolu ise false Değer Alarak Buraya Gelir ve Butonları Açar.
-            {
-                Sil_Button.Enabled = true;
-                TümKayıtlarınNoSil.Enabled = true;
-                Mail_Sil.Enabled = true;
-                Listele_Button.Enabled = true;
-                Ekle_Button.Enabled = true;
-                Güncelle_Button.Enabled = true;
-                ÖzelSil_button.Enabled = true;
-                return;
-            }
-        }
-        public void DosyaYolu_Button_Click(object sender, EventArgs e) // DOSYA Yolunu Ekleme İşlemi
+        private void Add_Picture_Click(object sender, EventArgs e)//Dosya Ekleme İconu
         {
-            openFileDialog1.ShowDialog();
-            textBox13.Text = openFileDialog1.FileName;
-            excelYol = textBox13.Text;
+            if (string.IsNullOrEmpty(textBox13.Text))
+            {
+                openFileDialog1.ShowDialog();
+                textBox13.Text = openFileDialog1.FileName;
+                excelYol = textBox13.Text;
 
-            baglanti = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; 
+                baglanti = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; 
              Data Source =" + excelYol + ";" +
-             "Extended Properties= 'Excel 12.0 Xml;HDR=YES'");
-            Listele_metod();
-            Btn_acma();
+                 "Extended Properties= 'Excel 12.0 Xml;HDR=YES'");
+                Listele_metod();
+                Btn_acma();
+            }
+            else if (!string.IsNullOrEmpty(textBox13.Text))
+            {
+                openFileDialog1.ShowDialog();
+                textBox13.Text = openFileDialog1.FileName;
+                excelYol = textBox13.Text;
+
+                baglanti = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; 
+                Data Source =" + excelYol + ";" +
+                 "Extended Properties= 'Excel 12.0 Xml;HDR=YES'");
+                Listele_metod();
+                Btn_acma();
+            }
         }
 
         void Listele_metod() // Listeleme Metodu
@@ -157,14 +138,14 @@ namespace Excel_Düzenleme_Programı
             }
         }
 
-        private void textBox11_KeyPress(object sender, KeyPressEventArgs e)// FAKS ALANI-Veri Engeli
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
+        //private void textBox11_KeyPress(object sender, KeyPressEventArgs e)// FAKS ALANI-Veri Engeli
+        //{
+        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+        //    {
+        //        e.Handled = true;
+        //    }
+        //}
+         
         private void textBox12_KeyPress(object sender, KeyPressEventArgs e)// CEP_TEL ALANI-Veri Engeli
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -314,8 +295,6 @@ namespace Excel_Düzenleme_Programı
             güncelle.Parameters.AddWithValue("@p1", textBox1.Text);
 
             var sonuc = güncelle.ExecuteNonQuery();
-            
-            //dataGridView1.Refresh();
             dataGridView1.DataSource = null;
             Listele_metod();
             MessageBox.Show("Tablo Verileriniz Güncellenmistir.", "Güncelleme Bilgisi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -783,54 +762,96 @@ namespace Excel_Düzenleme_Programı
                 string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
                 Regex regex = new Regex(pattern);
                 return regex.IsMatch(email);
-            }
+        }//@"Provider = Microsoft.ACE.OLEDB.12.0; 
+        //Data Source = " + excelYol + ";" +
+                //"Extended Properties= 'Excel 12.0 Xml;HDR=YES'"
 
             private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e) //Email Silme İşlemi
             {
-                // Tüm satırları döngüye aldırdım
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+            if (textBox7 != null && textBox1 != null)
+            {
+                using (OleDbConnection baglanti = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; 
+        Data Source = " + excelYol + ";" +
+                "Extended Properties= 'Excel 12.0 Xml;HDR=YES'"))
                 {
-                    progressBar1.Maximum = dataGridView1.Rows.Count + 1;
-                    progressBar1.Value = row.Index;
+                    baglanti.Open();
 
-                    // Satırdaki hücrede değer varsa e-posta adresi olarak kabul et
-                    if (row.Cells[6].Value != null)
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
-                        string email = row.Cells[6].Value.ToString();
-                        // E-posta adresi geçersizse hücreyi temizle (sil)
-                        if (!IsValidEmail(email))
+                        progressBar1.Maximum = dataGridView1.Rows.Count + 1;
+                        progressBar1.Value = row.Index;
+                         
+                        if (row.Cells[6].Value != null)
                         {
-                            //string bosdgr = "";
-                            //textBox7.Text = textBox7.Text.Replace(email, bosdgr);
-                            row.Cells[6].Value = "";
+                            string email = row.Cells[6].Value.ToString();
+
+                            if (!IsValidEmail(email))
+                            {
+                                row.Cells[6].Value = "";
+                            }
                         }
-                    }
 
-                    // Güncelleme işlemi yapılır
-                    if (textBox7 != null && textBox1 != null)
-                    {
-                        baglanti.Open(); // external table is not in the expected format. HATASI !
-                        OleDbCommand güncelle = new OleDbCommand("update [sayfa1$] set email=@p6 where id=@p1", baglanti);
-
-                        //güncelle.Parameters.AddWithValue("@p6", row.Cells[6].Value);
                         if (row.Cells[6].Value == null || string.IsNullOrEmpty(row.Cells[6].Value.ToString()))
                         {
-                            güncelle.Parameters.AddWithValue("@p6", DBNull.Value);
+                            row.Cells[6].Value = DBNull.Value;
                         }
-                        else
+
+                        string updateQuery = "UPDATE [sayfa1$] SET email = ? WHERE id = ?";
+
+                        using (OleDbCommand güncelle = new OleDbCommand(updateQuery, baglanti))
                         {
                             güncelle.Parameters.AddWithValue("@p6", row.Cells[6].Value);
-                        }
-                        güncelle.Parameters.AddWithValue("@p1", textBox1.Text);
-                        güncelle.ExecuteNonQuery();
-                        baglanti.Close();
+                            güncelle.Parameters.AddWithValue("@p1", textBox1.Text);
 
+                            güncelle.ExecuteNonQuery();
+                        }
                     }
 
+                    baglanti.Close();
                 }
-
             }
 
+            //// Tüm satırları döngüye aldırdım
+            //foreach (DataGridViewRow row in dataGridView1.Rows)
+            //{
+            //    progressBar1.Maximum = dataGridView1.Rows.Count + 1;
+            //    progressBar1.Value = row.Index;
+
+            //    // Satırdaki hücrede değer varsa e-posta adresi olarak kabul et
+            //    if (row.Cells[6].Value != null)
+            //    {
+            //        string email = row.Cells[6].Value.ToString();
+            //        // E-posta adresi geçersizse hücreyi temizle (sil)
+            //        if (!IsValidEmail(email))
+            //        {
+            //            //string bosdgr = "";
+            //            //textBox7.Text = textBox7.Text.Replace(email, bosdgr);
+            //            row.Cells[6].Value = "";
+            //        }
+            //    }
+
+            //    // Güncelleme işlemi yapılır
+            //    if (textBox7 != null && textBox1 != null)
+            //    {
+            //        baglanti.Open(); // external table is not in the expected format. HATASI !
+            //        OleDbCommand güncelle = new OleDbCommand("update [sayfa1$] set email=@p6 where id=@p1", baglanti);
+
+            //        //güncelle.Parameters.AddWithValue("@p6", row.Cells[6].Value);
+            //        if (row.Cells[6].Value == null || string.IsNullOrEmpty(row.Cells[6].Value.ToString()))
+            //        {
+            //            güncelle.Parameters.AddWithValue("@p6", DBNull.Value);
+            //        }
+            //        else
+            //        {
+            //            güncelle.Parameters.AddWithValue("@p6", row.Cells[6].Value);
+            //        }
+            //        güncelle.Parameters.AddWithValue("@p1", textBox1.Text);
+            //        güncelle.ExecuteNonQuery();
+            //        baglanti.Close();
+
+            //    }
+            //}
+        }
             private void backgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
                 MessageBox.Show("Formata Uygun Olmayan Mailler Tablonuzdan Temizlenmiştir", "Mail Silme Mesajı", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -841,7 +862,7 @@ namespace Excel_Düzenleme_Programı
 
             void Btn_kapatma() //Bir İşlem Dönerken Diğer İşlem Butonlarını Kapatıyor.
             {
-                DosyaYolu_Button.Enabled = false;
+                //Add_Picture.Enabled = false;
                 Sil_Button.Enabled = false;
                 TümKayıtlarınNoSil.Enabled = false;
                 Mail_Sil.Enabled = false;
@@ -852,7 +873,7 @@ namespace Excel_Düzenleme_Programı
             }
             void Btn_acma() //Kapatılmış Butonları İşlem Sonunda Tekrardan Açıyor. 
             {
-                DosyaYolu_Button.Enabled = true;
+                //Add_Picture.Enabled = true;
                 Sil_Button.Enabled = true;
                 TümKayıtlarınNoSil.Enabled = true;
                 Mail_Sil.Enabled = true;
@@ -862,7 +883,7 @@ namespace Excel_Düzenleme_Programı
                 ÖzelSil_button.Enabled = true;
             }
 
-        private void pictureBox1_Click(object sender, EventArgs e)//Fotoğraf Linki
+        private void pictureBox1_Click(object sender, EventArgs e)//Bilsoft Linki
         {
             System.Diagnostics.Process.Start("https://www.bilsoft.com");
         }
@@ -883,7 +904,7 @@ namespace Excel_Düzenleme_Programı
                 textBox9.ForeColor = SystemColors.GrayText;
                 textBox9.Text = "Örn; 541 327 1267";
             }
-        }
+        }//----------------------------------------------------------------------
 
         private void textBox10_Enter(object sender, EventArgs e)//Placeholder Kısmı TextBox10
         {
@@ -892,17 +913,16 @@ namespace Excel_Düzenleme_Programı
                 textBox10.ForeColor = Color.FromArgb(0, 0, 192);
                 textBox10.Text = "";
             }
-        }
+        } 
 
         private void textBox10_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox9.Text))
+            if (string.IsNullOrWhiteSpace(textBox10.Text))
             {
                 textBox10.ForeColor = SystemColors.GrayText;
                 textBox10.Text = "Örn; 541 327 1267";
             }
-
-        }
+        }//----------------------------------------------------------------------
 
         private void textBox12_Enter(object sender, EventArgs e)//Placeholder Kısmı TextBox12
         {
@@ -915,12 +935,32 @@ namespace Excel_Düzenleme_Programı
 
         private void textBox12_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox9.Text))
+            if (string.IsNullOrWhiteSpace(textBox12.Text))
             {
                 textBox12.ForeColor = SystemColors.GrayText;
                 textBox12.Text = "Örn; 541 327 1267";
             }
+        }//----------------------------------------------------------------------
+
+        private void Kopya_iconu_Click(object sender, EventArgs e)//Kopyalama İconu
+        {
+            if (!string.IsNullOrEmpty(textBox13.Text))
+            {
+                Clipboard.SetText(textBox13.Text);
+                MessageBox.Show("Dosya yolu kopyalanmıştır.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }  
         }
+
+        private void Kopya_iconu_MouseEnter(object sender, EventArgs e)//Kopyala İconu Metin Görüntülenme
+        {
+            label15.Visible = true;//İcon Metni Gözükür
+        }
+
+        private void Kopya_iconu_MouseLeave(object sender, EventArgs e)//Kopyala İconu Metin Görüntülenme
+        {
+            label15.Visible = false;//İcon Metni Gözükmez
+        }
+
     }
     }
 
